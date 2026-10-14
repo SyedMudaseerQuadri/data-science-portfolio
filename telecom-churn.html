@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Case study: predicting telecom customer churn on 7,043 customers with EDA and a Random Forest. By Syed Mudaseer Quadri.">
+  <title>Telecom Churn · Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">修</span>Syed Mudaseer</a>
+      <nav class="nav-links" id="nav-links"><a href="index.html#work" aria-current="page">Work</a><a href="index.html#approach">Approach</a><a href="index.html#skills">Skills</a><a href="index.html#about">About</a></nav>
+      <a class="nav-cta" href="resume.html">Résumé ↗</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap cs-hero">
+      <div class="crumbs"><a href="index.html#work">← All work</a> · Case study 01</div>
+      <div class="eyebrow"><span class="dot"></span>Data analysis &amp; machine learning · Nov 2025</div>
+      <h1>Who leaves a telecom, and <em>can we catch them in time?</em></h1>
+      <p class="lede cs-lede">A telecom loses about one customer in four. I explored 7,043 customer records to find what separates those who leave from those who stay. Then I trained a Random Forest to flag at-risk customers, and retuned it until it caught 70% of real churners instead of 48%.</p>
+
+      <div class="cs-facts">
+        <div><span>Role</span><strong>Solo: analysis, modelling, write-up</strong></div>
+        <div><span>Tools</span><strong>Python · Pandas · Seaborn · scikit-learn</strong></div>
+        <div><span>Data</span><strong>IBM Telco Customer Churn, 7,043 × 21</strong></div>
+        <div><span>Code</span><strong><a href="https://github.com/SyedMudaseerQuadri/telco-churn-project" target="_blank" rel="noreferrer">telco-churn-project ↗</a></strong></div>
+      </div>
+
+      <div class="headline-nums">
+        <div class="num"><strong class="hot">26.5%</strong><span>of customers churned (1,869 of 7,043)</span></div>
+        <div class="num"><strong>42.7%</strong><span>churn on month-to-month contracts, vs 2.8% on two-year</span></div>
+        <div class="num"><strong>10 mo</strong><span>median tenure of churners, vs 38 months for those who stayed</span></div>
+        <div class="num"><strong class="hot">48% → 70%</strong><span>share of real churners the model catches, after rebalancing</span></div>
+      </div>
+    </section>
+
+    <div class="wrap cs-layout">
+      <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <a href="#question">The question</a><a href="#data">The data</a><a href="#clean">Cleaning</a><a href="#explore">Exploration</a><a href="#model">Baseline model</a><a href="#improve">Catching more churners</a><a href="#recs">Recommendations</a><a href="#limits">Limits &amp; next steps</a>
+      </nav>
+
+      <article class="cs-body">
+        <section class="beat" id="question">
+          <div class="beat-head"><b>壱</b><h2>The question</h2></div>
+          <p>Winning a new subscriber costs a telecom far more than keeping an existing one. So the useful question isn't "how many people left?" It's <strong>"which customers are about to leave, and why?"</strong> That breaks down into two jobs:</p>
+          <ul>
+            <li><strong>Explain:</strong> find the customer traits linked to churn, so the business knows where to act.</li>
+            <li><strong>Predict:</strong> score each customer's churn risk so a retention team can reach them before they cancel.</li>
+          </ul>
+        </section>
+
+        <section class="beat" id="data">
+          <div class="beat-head"><b>弐</b><h2>The data</h2></div>
+          <p>The IBM Telco Customer Churn dataset has one row per customer: <strong>7,043 customers and 21 columns</strong>. The columns cover four areas:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Group</th><th>Columns</th></tr></thead>
+              <tbody>
+                <tr><td>Account</td><td>tenure (months), Contract, PaperlessBilling, PaymentMethod, MonthlyCharges, TotalCharges</td></tr>
+                <tr><td>Services</td><td>PhoneService, MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies</td></tr>
+                <tr><td>Demographics</td><td>gender, SeniorCitizen, Partner, Dependents</td></tr>
+                <tr class="hl"><td>Target</td><td><code>Churn</code>: Yes (1,869) / No (5,174)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The classes are imbalanced: only 26.5% of rows are churners. That matters later, because a model can score 73% accuracy by always predicting "stays" and never catch anyone.</p>
+        </section>
+
+        <section class="beat" id="clean">
+          <div class="beat-head"><b>参</b><h2>Cleaning</h2></div>
+          <p><code>df.info()</code> showed that <code>TotalCharges</code> was stored as text, not numbers. Converting it with <code>pd.to_numeric(errors="coerce")</code> exposed <strong>11 blank values</strong>. All 11 were brand-new customers with <code>tenure = 0</code>, so they had never been billed. I dropped them, leaving <strong>7,032 rows</strong>, which is 0.16% of the data.</p>
+          <p>For modelling, I mapped <code>Churn</code> to 1/0, dropped the <code>customerID</code> column and one-hot encoded the categorical columns with <code>pd.get_dummies(drop_first=True)</code>. That produced <strong>30 numeric features</strong>.</p>
+        </section>
+
+        <section class="beat" id="explore">
+          <div class="beat-head"><b>四</b><h2>Exploration</h2></div>
+          <p>I started with the commitment a customer has made: their contract.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/telco/contract.webp" alt="Bar chart of churn rate by contract type: month-to-month 42.7% of 3,875 customers, one year 11.3% of 1,473, two year 2.8% of 1,695." width="1453" height="951" loading="lazy"></button>
+            <figcaption><b>Fig 1</b><span>Contract type is the sharpest split in the data. Month-to-month customers churn 15 times as often as two-year customers.</span></figcaption>
+          </figure>
+          <div class="insight"><strong>Insight</strong><p>88.6% of all churners were on month-to-month plans. Any retention plan that ignores contract length is aiming at the wrong customers.</p></div>
+
+          <p>Next I looked at the add-on services. Customers without tech support or online security churned at almost three times the rate of customers who had them.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/telco/support.webp" alt="Grouped bar chart: churn is about 42% for customers without tech support or online security, about 15% with them, and 7% for customers with no internet." width="1453" height="921" loading="lazy"></button>
+            <figcaption><b>Fig 2</b><span>Support add-ons line up with loyalty: 41.6% vs 15.2% churn for tech support, and 41.8% vs 14.6% for online security.</span></figcaption>
+          </figure>
+
+          <p>Then I looked at time. Churn is concentrated in the first few months of a customer's life.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/telco/tenure.webp" alt="Step histogram of tenure. Churners pile up at 0 to 3 months (32% of them), while customers who stayed spread evenly with a peak near 70 months." width="1453" height="963" loading="lazy"></button>
+            <figcaption><b>Fig 3</b><span>Tenure is the clearest behavioural signal. The median churner left at 10 months, while the median customer who stayed had been there 38 months.</span></figcaption>
+          </figure>
+
+          <p>Finally, I compared monthly charges between the two groups.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/telco/charges.webp" alt="Box plot of monthly charges: churners have a median of about $80, and customers who stayed have a median of about $64." width="1464" height="810" loading="lazy"></button>
+            <figcaption><b>Fig 4</b><span>Churners pay more each month (median $79.65 vs $64.43). The gap tracks fiber-optic internet, where churn is 41.9% vs 19.0% on DSL.</span></figcaption>
+          </figure>
+          <div class="insight"><strong>Insight</strong><p>The highest-risk profile is a new, month-to-month, fiber customer paying by electronic check (45.3% churn) with no support add-ons. Each of those traits is something the business can change through pricing or onboarding.</p></div>
+        </section>
+
+        <section class="beat" id="model">
+          <div class="beat-head"><b>五</b><h2>Baseline model</h2></div>
+          <p>I split the data 80/20 (<code>random_state=42</code>) and trained a <code>RandomForestClassifier</code> with 100 trees. Random Forest handles mixed numeric and one-hot features without scaling, and it shows which features it relies on.</p>
+          <div class="fig-pair">
+            <figure class="figure">
+              <button type="button" aria-label="Enlarge chart"><img src="assets/telco/cm_baseline.webp" alt="Confusion matrix for the baseline model: 927 true stays, 106 false alarms, 196 missed churners, 178 caught churners." width="1002" height="886" loading="lazy"></button>
+              <figcaption><b>Fig 5</b><span>Baseline: 78.5% accuracy, but only 178 of 374 churners caught.</span></figcaption>
+            </figure>
+            <figure class="figure">
+              <button type="button" aria-label="Enlarge chart"><img src="assets/telco/importance.webp" alt="Horizontal bar chart of the top 10 feature importances: TotalCharges 0.193, MonthlyCharges 0.170, tenure 0.168, fiber optic 0.040, electronic check 0.035." width="1713" height="994" loading="lazy"></button>
+              <figcaption><b>Fig 6</b><span>The model leans on charges and tenure, which matches what the EDA found.</span></figcaption>
+            </figure>
+          </div>
+          <p>On paper, 78.5% accuracy and a ROC-AUC of 0.816 look fine. The confusion matrix tells a different story: the model <strong>missed 196 of the 374 churners (52%)</strong>. For a retention team, a missed churner is the expensive mistake. It's a customer who leaves without anyone reaching out.</p>
+          <p>One caution on Fig 6: impurity-based importance favours continuous columns like charges and tenure over 0/1 dummies. Contract type looks weaker here than it did in the EDA partly for that reason.</p>
+        </section>
+
+        <section class="beat" id="improve">
+          <div class="beat-head"><b>六</b><h2>Catching more churners</h2></div>
+          <p>When I re-ran the project for this case study, I tested one change to fix the recall problem. I set <code>class_weight="balanced"</code> so each churner counts about three times as much during training, and <code>min_samples_leaf=5</code> so the trees can't memorise single customers. Everything else stayed the same: same split, same features.</p>
+          <figure class="figure" style="max-width:560px">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/telco/cm_balanced.webp" alt="Confusion matrix with balanced class weights: 799 true stays, 234 false alarms, 112 missed churners, 262 caught churners." width="1002" height="886" loading="lazy"></button>
+            <figcaption><b>Fig 7</b><span>Balanced model: 262 of 374 churners caught.</span></figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Metric (test set, n = 1,407)</th><th class="n">Baseline</th><th class="n">Balanced</th></tr></thead>
+              <tbody>
+                <tr class="hl"><td>Churners caught (recall)</td><td class="n">178 · 48%</td><td class="n">262 · 70%</td></tr>
+                <tr><td>Precision on churn flags</td><td class="n">0.63</td><td class="n">0.53</td></tr>
+                <tr><td>Churn F1</td><td class="n">0.54</td><td class="n">0.60</td></tr>
+                <tr><td>False alarms</td><td class="n">106</td><td class="n">234</td></tr>
+                <tr><td>Accuracy</td><td class="n">78.5%</td><td class="n">75.4%</td></tr>
+                <tr><td>ROC-AUC</td><td class="n">0.816</td><td class="n">0.832</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="insight"><strong>The trade-off</strong><p>The balanced model catches 84 more real churners in exchange for 128 more false alarms, and accuracy drops 3 points. A false alarm costs a retention email or a small discount. A missed churner costs all of their future revenue. For this use, the balanced model is the better choice, even though its accuracy is lower.</p></div>
+        </section>
+
+        <section class="beat" id="recs">
+          <div class="beat-head"><b>七</b><h2>Recommendations</h2></div>
+          <div class="recs">
+            <div class="rec"><span>01 · CONTRACTS</span><h3>Move month-to-month customers onto annual plans</h3><p>Offer a discount or a perk for switching to a one-year contract. Churn falls from 42.7% to 11.3% when customers make that commitment.</p></div>
+            <div class="rec"><span>02 · ONBOARDING</span><h3>Focus on the first 90 days</h3><p>32% of churners leave within three months. A welcome check-in and early-life offers should target this window.</p></div>
+            <div class="rec"><span>03 · ADD-ONS</span><h3>Bundle tech support and security</h3><p>Customers with either add-on churn at a third of the rate. Free trials for new fiber customers could test whether this effect is causal.</p></div>
+            <div class="rec"><span>04 · OPERATIONS</span><h3>Score customers monthly</h3><p>Run the balanced model monthly and pass the top-risk list to the retention team. Use the model's probability to rank who to contact first.</p></div>
+          </div>
+        </section>
+
+        <section class="beat" id="limits">
+          <div class="beat-head"><b>八</b><h2>Limits &amp; next steps</h2></div>
+          <ul>
+            <li><strong>Correlation, not cause.</strong> Customers who buy support add-ons may already be more committed. An A/B test of free trials would show whether the add-ons themselves reduce churn.</li>
+            <li><strong>One snapshot.</strong> The data has no timestamps, so the model can't see changes in behaviour before someone leaves, such as a recent price increase or support calls.</li>
+            <li><strong>Next:</strong> tune the decision threshold against a real cost per false alarm, compare against logistic regression and gradient boosting, and use permutation importance for a fairer feature ranking.</li>
+          </ul>
+          <p>The analysis script that produced every number and chart on this page is in the portfolio repo: <a class="text-link" href="https://github.com/SyedMudaseerQuadri/data-science-portfolio/tree/main/analysis" target="_blank" rel="noreferrer">analysis/telco.py ↗</a></p>
+        </section>
+
+        <a class="next-case" href="netflix-streaming.html"><div><div class="eyebrow">Next case study</div><h3>Netflix &amp; Streaming Market</h3></div><i>→</i></a>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap"><span>© 2026 Syed Mudaseer Quadri</span><a href="mailto:syedmudaseerquadri@gmail.com">syedmudaseerquadri@gmail.com</a><a href="#">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>

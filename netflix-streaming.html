@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Case study: exploring Netflix's 8,807-title catalog and 13 years of subscription prices across 10 streaming services. By Syed Mudaseer Quadri.">
+  <title>Streaming Market · Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">修</span>Syed Mudaseer</a>
+      <nav class="nav-links" id="nav-links"><a href="index.html#work" aria-current="page">Work</a><a href="index.html#approach">Approach</a><a href="index.html#skills">Skills</a><a href="index.html#about">About</a></nav>
+      <a class="nav-cta" href="resume.html">Résumé ↗</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap cs-hero">
+      <div class="crumbs"><a href="index.html#work">← All work</a> · Case study 02</div>
+      <div class="eyebrow"><span class="dot"></span>Data analysis · Apr 2025</div>
+      <h1>What Netflix offers, and <em>what it costs to stay.</em></h1>
+      <p class="cs-lede">Retention on a streaming service comes down to two things: is there something worth watching, and is it worth the price? I studied both. First, an exploration of Netflix's 8,807-title catalog. Second, a pricing study that follows monthly plan prices for 10 services from 2011 to 2024.</p>
+
+      <div class="cs-facts">
+        <div><span>Role</span><strong>Solo: cleaning, EDA, write-up</strong></div>
+        <div><span>Tools</span><strong>Python · Pandas · Matplotlib · Seaborn</strong></div>
+        <div><span>Data</span><strong>8,807 Netflix titles · 777 monthly prices</strong></div>
+        <div><span>Code</span><strong><a href="https://github.com/SyedMudaseerQuadri/Netflix_Tvshows-_prediction" target="_blank" rel="noreferrer">Catalog ↗</a> · <a href="https://github.com/SyedMudaseerQuadri/Streaming_princing_prediction" target="_blank" rel="noreferrer">Pricing ↗</a></strong></div>
+      </div>
+
+      <div class="headline-nums">
+        <div class="num"><strong>70%</strong><span>of the catalog is movies (6,131 of 8,807 titles)</span></div>
+        <div class="num"><strong>2,016</strong><span>titles added in 2019, the peak year</span></div>
+        <div class="num"><strong class="hot">+94%</strong><span>rise in Netflix's plan price, from $7.99 (2011) to $15.49 (2023)</span></div>
+        <div class="num"><strong class="hot">13 of 16</strong><span>price hikes across all 10 services happened in 2022 or later</span></div>
+      </div>
+    </section>
+
+    <div class="wrap cs-layout">
+      <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <a href="#question">The question</a><a href="#data">The data</a><a href="#clean">Cleaning</a><a href="#catalog">The catalog</a><a href="#pricing">Pricing</a><a href="#recs">What it means</a><a href="#limits">Limits &amp; next steps</a>
+      </nav>
+
+      <article class="cs-body">
+        <section class="beat" id="question">
+          <div class="beat-head"><b>壱</b><h2>The question</h2></div>
+          <p>A subscriber stays on a streaming service when the catalog keeps giving them reasons to stay and the price still feels fair. So I set out to answer two questions with public data:</p>
+          <ul>
+            <li><strong>Content:</strong> What does Netflix actually offer? How has the catalog grown, which genres dominate, and where do the titles come from?</li>
+            <li><strong>Price:</strong> How fast have subscription prices climbed, and is Netflix unusual or part of an industry-wide trend?</li>
+          </ul>
+        </section>
+
+        <section class="beat" id="data">
+          <div class="beat-head"><b>弐</b><h2>The data</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Dataset</th><th class="n">Rows</th><th>Key columns</th></tr></thead>
+              <tbody>
+                <tr><td><code>netflix_titles.csv</code></td><td class="n">8,807</td><td>type, title, director, cast, country, date_added, release_year, rating, duration, listed_in (genres)</td></tr>
+                <tr><td><code>streaming_service.csv</code></td><td class="n">777</td><td>service, date (month), price in USD. 10 services, Jul 2011 to Jan 2024</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The catalog covers titles added up to 25 September 2021. The pricing file records one monthly plan price per service per month, so each price hike appears as a step.</p>
+        </section>
+
+        <section class="beat" id="clean">
+          <div class="beat-head"><b>参</b><h2>Cleaning</h2></div>
+          <ul>
+            <li><strong>Missing values.</strong> <code>director</code> is blank for 2,634 titles (29.9%), and <code>cast</code> and <code>country</code> for about 830 each. I kept these rows and excluded the blanks only from the analysis that needed that column, so I didn't throw away a third of the catalog.</li>
+            <li><strong>Dates.</strong> <code>date_added</code> is text like "September 25, 2021". I parsed it with an explicit format; 10 titles had no date.</li>
+            <li><strong>Multi-value cells.</strong> <code>listed_in</code> and <code>country</code> hold comma-separated lists, such as "Dramas, International Movies". I split and exploded them so each genre or country is counted once per title.</li>
+            <li><strong>Mixed units.</strong> <code>duration</code> means minutes for movies but seasons for TV shows, so I parsed each type separately.</li>
+            <li><strong>A parsing bug I fixed.</strong> The original pricing notebook parsed dates with <code>"%b-%y"</code>, but the file stores four-digit years ("Jul-2011"). Switching to <code>"%b-%Y"</code> made the whole time series parse correctly.</li>
+          </ul>
+        </section>
+
+        <section class="beat" id="catalog">
+          <div class="beat-head"><b>四</b><h2>The catalog</h2></div>
+          <p>Netflix's catalog grew fast and then levelled off.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/netflix/added.webp" alt="Line chart of titles added per year, 2015 to 2021. Movies rise from 56 to a peak of 1,424 in 2019, then fall to 993 in 2021. TV shows rise from 26 to about 595 in 2020." width="1460" height="946" loading="lazy"></button>
+            <figcaption><b>Fig 1</b><span>Movie additions peaked in 2019 (1,424) and fell after. TV additions kept rising until 2020 (595). The 2021 figures cover only January to September.</span></figcaption>
+          </figure>
+          <div class="insight"><strong>Insight</strong><p>From 2019, the mix shifted toward series. Series bring viewers back week after week, while a movie is watched once. That shift fits a retention strategy, though 67% of Netflix's TV shows still have only one season.</p></div>
+
+          <div class="fig-pair">
+            <figure class="figure">
+              <button type="button" aria-label="Enlarge chart"><img src="assets/netflix/genres.webp" alt="Horizontal bar chart of the 10 most common genre tags. International Movies 2,752, Dramas 2,427, Comedies 1,674, International TV Shows 1,351, Documentaries 869." width="1684" height="993" loading="lazy"></button>
+              <figcaption><b>Fig 2</b><span>"International" is the largest tag on both the movie side (2,752) and the TV side (1,351).</span></figcaption>
+            </figure>
+            <figure class="figure">
+              <button type="button" aria-label="Enlarge chart"><img src="assets/netflix/countries.webp" alt="Horizontal bar chart of the top 10 producing countries. United States 3,689, India 1,046, United Kingdom 804, Canada 445, France 393." width="1569" height="993" loading="lazy"></button>
+              <figcaption><b>Fig 3</b><span>The US leads, but India is a clear second with 1,046 titles, more than the UK and Canada.</span></figcaption>
+            </figure>
+          </div>
+          <p>A few more facts from the catalog: the median movie runs <strong>98 minutes</strong> (half fall between 87 and 114), and the most common rating is <strong>TV-MA</strong> (3,207 titles), so the catalog leans adult.</p>
+        </section>
+
+        <section class="beat" id="pricing">
+          <div class="beat-head"><b>五</b><h2>Pricing</h2></div>
+          <p>The original notebook compared Netflix, Disney+ and Prime Video, so I started with those three.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/netflix/prices.webp" alt="Step chart of monthly prices. Netflix stays at $7.99 from 2011 to 2019, then rises to $8.99, $9.99 and $15.49 by October 2023. Disney+ goes from $6.99 to $13.99 between 2019 and 2023. Prime Video goes from $8.99 to $11.99 in January 2024." width="1563" height="921" loading="lazy"></button>
+            <figcaption><b>Fig 4</b><span>Netflix held $7.99 for seven and a half years. Then the price rose 72% between 2019 and 2023, with the biggest jump ($9.99 to $15.49) in October 2023.</span></figcaption>
+          </figure>
+          <p>Then I extended the study to all 10 services to see whether Netflix was an outlier.</p>
+          <figure class="figure">
+            <button type="button" aria-label="Enlarge chart"><img src="assets/netflix/increase.webp" alt="Horizontal bar chart of total price increase per service. Apple TV+ and Disney+ up 100%, Netflix up 94%, Hulu up 50%, Prime Video up 33%, Peacock and Paramount+ up 20%, Shudder up 17%, HBO Max up 7%, Crunchyroll unchanged." width="1665" height="953" loading="lazy"></button>
+            <figcaption><b>Fig 5</b><span>Disney+ and Apple TV+ doubled their prices in four years, faster than Netflix did in twelve. Only Crunchyroll stayed flat.</span></figcaption>
+          </figure>
+          <div class="insight"><strong>Insight</strong><p>Netflix isn't an outlier. The cheap-subscription era ended across the industry: 13 of the 16 price hikes in the data happened between January 2022 and January 2024. Newer services launched cheap and then raised prices quickly to catch up.</p></div>
+        </section>
+
+        <section class="beat" id="recs">
+          <div class="beat-head"><b>六</b><h2>What it means</h2></div>
+          <div class="recs">
+            <div class="rec"><span>01 · PRICE</span><h3>Pay attention to price sensitivity now</h3><p>With almost every service raising prices at once, switching between them is easy. Price hikes should come with a clear new reason to stay, such as a flagship release or a cheaper ad-supported plan.</p></div>
+            <div class="rec"><span>02 · CONTENT</span><h3>Invest in multi-season series</h3><p>Two-thirds of TV titles end after one season. Shows that keep running give subscribers a reason to stay month after month, which a library of one-off movies doesn't.</p></div>
+            <div class="rec"><span>03 · MARKETS</span><h3>Grow with international content</h3><p>"International" is the largest genre tag, and India is the second-largest producer. Local-language originals are a growth path in markets where price matters most.</p></div>
+            <div class="rec"><span>04 · MEASURE</span><h3>Link hikes to cancellations</h3><p>The next step is to join the price timeline to subscriber cancellation data, so each hike can be judged by how many customers it lost.</p></div>
+          </div>
+        </section>
+
+        <section class="beat" id="limits">
+          <div class="beat-head"><b>七</b><h2>Limits &amp; next steps</h2></div>
+          <ul>
+            <li><strong>No subscriber data.</strong> Neither dataset includes viewing or cancellation records, so this study describes what Netflix offers and what it costs. It can't measure who leaves. The telecom case study covers churn modelling directly.</li>
+            <li><strong>One price per service.</strong> The pricing file tracks a single plan per service in USD and doesn't name the tier. Ad-supported and regional plans aren't included.</li>
+            <li><strong>Catalog snapshot.</strong> The title list stops in September 2021 and shows what was on Netflix at that point, not titles that were later removed.</li>
+            <li><strong>Next:</strong> the Random Forest planned in the original project README, plus a dashboard of these charts in Power BI.</li>
+          </ul>
+          <p>The analysis script that produced every number and chart on this page is in the portfolio repo: <a class="text-link" href="https://github.com/SyedMudaseerQuadri/data-science-portfolio/tree/main/analysis" target="_blank" rel="noreferrer">analysis/netflix.py ↗</a></p>
+        </section>
+
+        <a class="next-case" href="telecom-churn.html"><div><div class="eyebrow">Previous case study</div><h3>Telecom Customer Churn</h3></div><i>←</i></a>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap"><span>© 2026 Syed Mudaseer Quadri</span><a href="mailto:syedmudaseerquadri@gmail.com">syedmudaseerquadri@gmail.com</a><a href="#">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>

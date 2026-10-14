@@ -1,0 +1,132 @@
+{
+ "rows": 7043,
+ "cols": 21,
+ "churn_counts": {
+  "No": 5174,
+  "Yes": 1869
+ },
+ "churn_rate": 26.5,
+ "tenure_mean": {
+  "No": 37.57,
+  "Yes": 17.98
+ },
+ "tenure_median": {
+  "No": 38.0,
+  "Yes": 10.0
+ },
+ "monthly_median": {
+  "No": 64.43,
+  "Yes": 79.65
+ },
+ "blank_totalcharges": 11,
+ "contract_rate": {
+  "Month-to-month": 42.7,
+  "One year": 11.3,
+  "Two year": 2.8
+ },
+ "contract_n": {
+  "Month-to-month": 3875,
+  "One year": 1473,
+  "Two year": 1695
+ },
+ "TechSupport_rate": {
+  "No": 41.6,
+  "Yes": 15.2,
+  "No internet service": 7.4
+ },
+ "OnlineSecurity_rate": {
+  "No": 41.8,
+  "Yes": 14.6,
+  "No internet service": 7.4
+ },
+ "rows_after_clean": 7032,
+ "features": 30,
+ "cm": [
+  [
+   927,
+   106
+  ],
+  [
+   196,
+   178
+  ]
+ ],
+ "report": {
+  "0": {
+   "precision": 0.8254674977738201,
+   "recall": 0.8973862536302033,
+   "f1-score": 0.859925788497217,
+   "support": 1033.0
+  },
+  "1": {
+   "precision": 0.6267605633802817,
+   "recall": 0.47593582887700536,
+   "f1-score": 0.541033434650456,
+   "support": 374.0
+  },
+  "accuracy": 0.7853589196872779,
+  "macro avg": {
+   "precision": 0.7261140305770509,
+   "recall": 0.6866610412536043,
+   "f1-score": 0.7004796115738365,
+   "support": 1407.0
+  },
+  "weighted avg": {
+   "precision": 0.7726484548006975,
+   "recall": 0.7853589196872779,
+   "f1-score": 0.7751598038926054,
+   "support": 1407.0
+  }
+ },
+ "auc": 0.816,
+ "balanced_cm": [
+  [
+   799,
+   234
+  ],
+  [
+   112,
+   262
+  ]
+ ],
+ "balanced_report": {
+  "0": {
+   "precision": 0.8770581778265643,
+   "recall": 0.7734753146176185,
+   "f1-score": 0.8220164609053497,
+   "support": 1033.0
+  },
+  "1": {
+   "precision": 0.5282258064516129,
+   "recall": 0.7005347593582888,
+   "f1-score": 0.6022988505747127,
+   "support": 374.0
+  },
+  "accuracy": 0.7540867093105899,
+  "macro avg": {
+   "precision": 0.7026419921390885,
+   "recall": 0.7370050369879537,
+   "f1-score": 0.7121576557400312,
+   "support": 1407.0
+  },
+  "weighted avg": {
+   "precision": 0.7843337237439545,
+   "recall": 0.7540867093105899,
+   "f1-score": 0.7636124905687057,
+   "support": 1407.0
+  }
+ },
+ "balanced_auc": 0.832,
+ "importance": {
+  "TotalCharges": 0.1934,
+  "MonthlyCharges": 0.1698,
+  "tenure": 0.1676,
+  "InternetService_Fiber optic": 0.04,
+  "PaymentMethod_Electronic check": 0.035,
+  "OnlineSecurity_Yes": 0.0289,
+  "Contract_Two year": 0.0286,
+  "gender_Male": 0.027,
+  "TechSupport_Yes": 0.0258,
+  "PaperlessBilling_Yes": 0.025
+ }
+}

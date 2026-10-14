@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Syed Mudaseer Quadri — Artificial Intelligence & Data Science undergraduate focused on data analysis, machine learning, Python and SQL.">
-  <title>Syed Mudaseer — Data Science & Analytics</title>
+  <meta name="description" content="Syed Mudaseer Quadri, AI & Data Science undergraduate. Case studies in churn prediction and streaming-market analysis with Python, SQL and machine learning.">
+  <title>Syed Mudaseer · Data Science</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
@@ -12,55 +12,155 @@
 </head>
 <body>
   <header class="nav">
-    <a class="brand" href="#top"><span class="brand-mark">修</span> Syed Mudaseer</a>
-    <nav><a href="#work">Work</a><a href="#approach">Approach</a><a href="#skills">Skills</a><a href="#about">About</a></nav>
-    <a class="nav-resume" href="resume.html" target="_blank">Résumé ↗</a>
+    <div class="wrap">
+      <a class="brand" href="#top"><span class="brand-mark">修</span>Syed Mudaseer</a>
+      <nav class="nav-links" id="nav-links"><a href="#work">Work</a><a href="#approach">Approach</a><a href="#skills">Skills</a><a href="#about">About</a></nav>
+      <a class="nav-cta" href="resume.html">Résumé ↗</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    </div>
   </header>
+
   <main id="top">
-    <section class="hero section">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="dot"></span> ARTIFICIAL INTELLIGENCE & DATA SCIENCE · HYDERABAD</div>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>AI &amp; Data Science · Hyderabad</div>
         <h1>I turn messy data into <em>clear decisions.</em></h1>
-        <p class="hero-text">I'm Syed Mudaseer Quadri, an AI & Data Science undergraduate with strong foundations in Python, SQL and data analysis. I work across cleaning, EDA, feature engineering, machine learning and business-focused problem solving.</p>
+        <p class="hero-text">I'm Syed Mudaseer Quadri, an AI &amp; Data Science undergraduate. I clean, explore and model real datasets in Python and SQL, then explain what the numbers mean for the business.</p>
         <div class="hero-actions">
-          <a class="button button-dark" href="#work">Explore my work <span>↓</span></a>
+          <a class="button button-dark" href="#work">Read the case studies <span>↓</span></a>
           <a class="text-link" href="https://github.com/SyedMudaseerQuadri" target="_blank" rel="noreferrer">GitHub ↗</a>
           <a class="text-link" href="https://www.linkedin.com/in/syed-mudaseer-quadri" target="_blank" rel="noreferrer">LinkedIn ↗</a>
         </div>
       </div>
-      <div class="hero-art">
-        <div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div>
-        <div class="data-core"><span class="core-label">DATA → INSIGHT</span><strong>01</strong><small>clean · explore · model</small></div>
-        <div class="floating-card card-a"><span>Python</span><b>EDA</b></div>
-        <div class="floating-card card-b"><span>SQL</span><b>Insights</b></div>
-        <div class="floating-card card-c"><span>ML</span><b>Predict</b></div>
+      <aside class="hero-panel" aria-label="A finding from the telecom churn case study">
+        <div class="eyebrow">From the telecom case study</div>
+        <div class="panel-title">Churn rate by contract type</div>
+        <div class="bars">
+          <div class="bar-row"><span>Month-to-month</span><div class="bar-track"><div class="bar-fill" style="width:85.4%"></div></div><b>42.7%</b></div>
+          <div class="bar-row"><span>One year</span><div class="bar-track"><div class="bar-fill cool" style="width:22.6%;animation-delay:.15s"></div></div><b>11.3%</b></div>
+          <div class="bar-row"><span>Two year</span><div class="bar-track"><div class="bar-fill cool" style="width:5.6%;animation-delay:.3s"></div></div><b>2.8%</b></div>
+        </div>
+        <div class="panel-foot"><span>7,043 customers · IBM Telco</span><a href="telecom-churn.html">Full study →</a></div>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="Portfolio at a glance">
+      <div class="wrap">
+        <div class="stat"><strong>2</strong><span>Re-run case studies</span></div>
+        <div class="stat"><strong>16,627</strong><span>Rows analysed</span></div>
+        <div class="stat"><strong>12</strong><span>Charts from the code</span></div>
+        <div class="stat"><strong>48% → 70%</strong><span>Churners caught after rebalancing</span></div>
       </div>
     </section>
-    <section class="ticker"><div>PYTHON</div><span>✦</span><div>SQL</div><span>✦</span><div>EDA</div><span>✦</span><div>FEATURE ENGINEERING</div><span>✦</span><div>MACHINE LEARNING</div><span>✦</span><div>POWER BI</div><span>✦</span><div>TABLEAU</div></section>
-    <section id="work" class="section work-section">
-      <div class="section-intro"><div class="section-number">壱</div><div><div class="eyebrow">SELECTED WORK</div><h2>Analysis that starts with a question.</h2><p>Projects spanning customer behavior, churn, structured data and full-stack systems.</p></div></div>
-      <div class="project-grid">
-        <article class="project"><div class="project-top"><span>DATA ANALYSIS & ML</span><span>NOV · 2025</span></div><div class="project-visual churn"><div class="mini-chart"><i style="height:35%"></i><i style="height:54%"></i><i style="height:43%"></i><i style="height:72%"></i><i style="height:61%"></i><i style="height:86%"></i><i style="height:68%"></i><i style="height:94%"></i></div><div class="chart-label">CHURN SIGNALS</div></div><div class="project-body"><h3>Telecom Customer Churn Analysis</h3><p>Analyzed telecom customer data to identify patterns contributing to churn, from preprocessing and EDA through feature engineering and model evaluation.</p><div class="tags"><span>Python</span><span>EDA</span><span>Feature Engineering</span><span>ML</span></div><div class="project-note">Key drivers identified: tenure, contract type and service usage.</div></div></article>
-        <article class="project"><div class="project-top"><span>DATA ANALYSIS</span><span>APR · 2025</span></div><div class="project-visual netflix"><div class="rings"><b>RETENTION</b><span>VIEWING</span><span>PLANS</span></div></div><div class="project-body"><h3>Netflix Customer Churn Analysis</h3><p>Used Python and SQL to study viewing patterns, subscription plans and engagement metrics affecting customer retention.</p><div class="tags"><span>Python</span><span>SQL</span><span>EDA</span></div><div class="project-note">Translated behavioral patterns into business-oriented retention insights.</div></div></article>
-        <article class="project"><div class="project-top"><span>FULL STACK · DATA SYSTEM</span><span>MAR–MAY · 2024</span></div><div class="project-visual sports"><div class="node n1">PLAYER</div><div class="node n2">MATCH</div><div class="node n3">REPORT</div><div class="node n4">STATS</div><div class="line l1"></div><div class="line l2"></div></div><div class="project-body"><h3>Sports Management System</h3><p>Built a full-stack system for players, matches, schedules and performance records with REST APIs and database schemas designed for querying and future analytics.</p><div class="tags"><span>Node.js</span><span>Express</span><span>MongoDB</span><span>SQL</span></div><div class="project-note">Data systems built with analytics and reporting in mind.</div></div></article>
-        <article class="project"><div class="project-top"><span>HACKATHON</span><span>DEC · 2023</span></div><div class="project-visual hack"><div class="terminal"><span>&gt; problem.load()</span><span>&gt; team.collaborate()</span><span>&gt; prototype.build()</span><span>_</span></div></div><div class="project-body"><h3>Hackathon Project · GDSC</h3><p>Developed a functional prototype under strict time constraints and collaborated as a team to solve a real-world problem statement.</p><div class="tags"><span>Prototype</span><span>Collaboration</span><span>Problem Solving</span></div></div></article>
+
+    <section id="work" class="section">
+      <div class="wrap">
+        <div class="section-intro"><div class="section-number">壱</div><div><div class="eyebrow">Selected work</div><h2>Analysis that starts with a question.</h2><p>Each case study was re-run from its original code. Every chart on these pages comes from that run.</p></div></div>
+
+        <div class="case-list">
+          <a class="case-card reveal" href="telecom-churn.html">
+            <div class="case-media"><img src="assets/telco/contract.webp" alt="Bar chart: churn rate is 42.7% for month-to-month contracts, 11.3% for one-year and 2.8% for two-year." width="1453" height="951" loading="lazy"></div>
+            <div class="case-body">
+              <div class="case-meta"><span>Data analysis &amp; ML</span><span>Nov · 2025</span></div>
+              <h3>Telecom Customer Churn</h3>
+              <p>Who leaves a telecom provider, and can we flag them in time? EDA on 7,043 customers, then a Random Forest that I retuned to catch far more of the people who actually churn.</p>
+              <div class="case-kpis"><div><strong>26.5%</strong><span>Base churn rate</span></div><div><strong>0.83</strong><span>ROC-AUC</span></div><div><strong>70%</strong><span>Churn recall</span></div></div>
+              <div class="tags"><span>Python</span><span>Pandas</span><span>Seaborn</span><span>scikit-learn</span></div>
+              <span class="case-link">Read case study <i>→</i></span>
+            </div>
+          </a>
+
+          <a class="case-card reveal" href="netflix-streaming.html">
+            <div class="case-media"><img src="assets/netflix/prices.webp" alt="Step chart of monthly plan prices: Netflix rises from $7.99 to $15.49, Disney+ from $6.99 to $13.99, Prime Video from $8.99 to $11.99." width="1563" height="921" loading="lazy"></div>
+            <div class="case-body">
+              <div class="case-meta"><span>Data analysis</span><span>Apr · 2025</span></div>
+              <h3>Netflix &amp; Streaming Market</h3>
+              <p>What is on Netflix, where it comes from, and how fast subscription prices are climbing across 10 streaming services. Catalog EDA on 8,807 titles plus a pricing study.</p>
+              <div class="case-kpis"><div><strong>8,807</strong><span>Titles analysed</span></div><div><strong>+94%</strong><span>Netflix price, 2011–24</span></div><div><strong>10</strong><span>Services compared</span></div></div>
+              <div class="tags"><span>Python</span><span>Pandas</span><span>EDA</span><span>Time series</span></div>
+              <span class="case-link">Read case study <i>→</i></span>
+            </div>
+          </a>
+        </div>
+
+        <div class="other-head eyebrow">Other projects</div>
+        <div class="other-grid">
+          <article class="other reveal">
+            <div class="case-meta"><span>Full stack · Data system</span><span>Mar–May · 2024</span></div>
+            <h4>Sports Management System</h4>
+            <p>A full-stack system for players, matches, schedules and performance records, with REST APIs and database schemas designed for querying and later analytics.</p>
+            <div class="tags"><span>Node.js</span><span>Express</span><span>MongoDB</span><span>SQL</span></div>
+            <p class="note">Summary only. The code is not public, so there's no case study yet.</p>
+          </article>
+          <article class="other reveal">
+            <div class="case-meta"><span>Hackathon · GDSC</span><span>Dec · 2023</span></div>
+            <h4>GDSC Hackathon Prototype</h4>
+            <p>Built a working prototype as a team under strict time limits, solving a real-world problem statement from brief to demo.</p>
+            <div class="tags"><span>Prototype</span><span>Teamwork</span><span>Problem solving</span></div>
+            <p class="note">Summary only. The code is not public, so there's no case study yet.</p>
+          </article>
+        </div>
       </div>
     </section>
+
     <section id="approach" class="section approach-section">
-      <div class="section-intro"><div class="section-number">弐</div><div><div class="eyebrow">MY APPROACH</div><h2>From raw rows to a useful answer.</h2></div></div>
-      <div class="process"><div class="process-step"><span>01</span><h3>Question</h3><p>Define what the business or dataset is actually trying to answer.</p></div><div class="process-step"><span>02</span><h3>Clean</h3><p>Prepare structured data so analysis is reliable and repeatable.</p></div><div class="process-step"><span>03</span><h3>Explore</h3><p>Use EDA to surface distributions, relationships, anomalies and patterns.</p></div><div class="process-step"><span>04</span><h3>Model</h3><p>Apply feature engineering and machine learning when prediction adds value.</p></div><div class="process-step"><span>05</span><h3>Explain</h3><p>Turn findings into insights that a non-technical stakeholder can act on.</p></div></div>
+      <div class="wrap">
+        <div class="section-intro"><div class="section-number">弐</div><div><div class="eyebrow">My approach</div><h2>From raw rows to a useful answer.</h2></div></div>
+        <div class="process">
+          <div class="process-step"><span>01</span><h3>Question</h3><p>Define what the business or dataset is actually trying to answer.</p></div>
+          <div class="process-step"><span>02</span><h3>Clean</h3><p>Fix types, blanks and duplicates so the analysis is reliable and repeatable.</p></div>
+          <div class="process-step"><span>03</span><h3>Explore</h3><p>Use EDA to surface distributions, relationships and anomalies.</p></div>
+          <div class="process-step"><span>04</span><h3>Model</h3><p>Engineer features and train a model when prediction adds value.</p></div>
+          <div class="process-step"><span>05</span><h3>Explain</h3><p>Turn findings into actions a non-technical stakeholder can take.</p></div>
+        </div>
+      </div>
     </section>
-    <section id="skills" class="section skills-section">
-      <div class="section-intro"><div class="section-number">参</div><div><div class="eyebrow">TOOLKIT</div><h2>The stack behind the analysis.</h2></div></div>
-      <div class="skills-layout"><div class="skill-cloud"><span class="big">Python</span><span>SQL</span><span>Data Cleaning</span><span class="big">EDA</span><span>Feature Engineering</span><span>Churn Analysis</span><span>Machine Learning</span><span class="big">Power BI</span><span>Tableau</span><span>MySQL</span><span>MongoDB</span><span>Git</span><span>GitHub</span><span>Node.js</span><span>Express</span><span>REST APIs</span></div><div class="skill-side"><div><span>PROGRAMMING</span><strong>Python · SQL · JavaScript</strong></div><div><span>DATA SCIENCE</span><strong>Cleaning · EDA · Feature Engineering · Churn Analysis</strong></div><div><span>DATABASES</span><strong>MySQL · MongoDB</strong></div><div><span>VISUALIZATION</span><strong>Tableau · Power BI</strong></div></div></div>
+
+    <section id="skills" class="section">
+      <div class="wrap">
+        <div class="section-intro"><div class="section-number">参</div><div><div class="eyebrow">Toolkit</div><h2>The stack behind the analysis.</h2></div></div>
+        <div class="skills-layout">
+          <div class="skill-cloud"><span class="big">Python</span><span>SQL</span><span>Pandas</span><span>NumPy</span><span class="big">EDA</span><span>Data cleaning</span><span>Feature engineering</span><span>scikit-learn</span><span>Random Forest</span><span>Matplotlib</span><span>Seaborn</span><span class="big">Power BI</span><span>Tableau</span><span>MySQL</span><span>MongoDB</span><span>Git</span><span>Node.js</span><span>Express</span><span>REST APIs</span></div>
+          <div class="skill-side">
+            <div><span>PROGRAMMING</span><strong>Python · SQL · JavaScript</strong></div>
+            <div><span>DATA SCIENCE</span><strong>Cleaning · EDA · Feature engineering · Classification</strong></div>
+            <div><span>DATABASES</span><strong>MySQL · MongoDB</strong></div>
+            <div><span>VISUALISATION</span><strong>Matplotlib · Seaborn · Tableau · Power BI</strong></div>
+          </div>
+        </div>
+      </div>
     </section>
+
     <section id="about" class="section about-section">
-      <div class="section-intro"><div class="section-number">四</div><div><div class="eyebrow">ABOUT</div><h2>The person behind the datasets.</h2></div></div>
-      <div class="about-grid"><div class="about-copy"><p class="large">I'm an Artificial Intelligence & Data Science undergraduate at Guru Nanak Institute of Technology, Hyderabad.</p><p>My foundation is in Python, SQL and data analysis, complemented by a Minor in Business Analysis from IIT Mandi. I enjoy working with structured datasets, finding patterns and translating technical work into useful answers.</p><p>My projects range from customer churn analysis to a sports management system with REST APIs and databases designed for future analytics.</p></div><div class="facts"><div><span>EDUCATION</span><strong>B.Tech · AI & Data Science</strong><small>Guru Nanak Institute of Technology · CGPA 7.00</small></div><div><span>MINOR</span><strong>Business Analysis</strong><small>Indian Institute of Technology Mandi · CGPA 8.00</small></div><div><span>CERTIFICATIONS</span><strong>Python · Web Development</strong><small>Udemy</small></div></div></div>
+      <div class="wrap">
+        <div class="section-intro"><div class="section-number">四</div><div><div class="eyebrow">About</div><h2>The person behind the datasets.</h2></div></div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p class="large">I'm an Artificial Intelligence &amp; Data Science undergraduate at Guru Nanak Institute of Technology, Hyderabad.</p>
+            <p>My foundation is in Python, SQL and data analysis, with a Minor in Business Analysis from IIT Mandi. I like structured datasets, finding the pattern that matters and explaining it in plain words.</p>
+            <p>My work ranges from churn prediction and streaming-market analysis to a sports management system with REST APIs and databases built for later analytics.</p>
+          </div>
+          <div class="facts">
+            <div><span>EDUCATION</span><strong>B.Tech · AI &amp; Data Science</strong><small>Guru Nanak Institute of Technology · CGPA 7.00</small></div>
+            <div><span>MINOR</span><strong>Business Analysis</strong><small>Indian Institute of Technology Mandi · CGPA 8.00</small></div>
+            <div><span>CERTIFICATIONS</span><strong>Python · Web Development</strong><small>Udemy</small></div>
+          </div>
+        </div>
+      </div>
     </section>
-    <section class="contact section"><div class="contact-mark">縁</div><div class="eyebrow">LET'S CONNECT</div><h2>Have a dataset worth exploring?</h2><p>I'm open to opportunities where I can work with data, build analytical solutions and keep growing in AI & Data Science.</p><div class="contact-actions"><a class="button button-dark" href="mailto:mudaseerquadri56@gmail.com">mudaseerquadri56@gmail.com ↗</a><a class="button button-light" href="resume.html" target="_blank">View résumé ↗</a></div><div class="socials"><a href="https://github.com/SyedMudaseerQuadri" target="_blank">GitHub</a><a href="https://www.linkedin.com/in/syed-mudaseer-quadri" target="_blank">LinkedIn</a></div></section>
+
+    <section class="section contact">
+      <div class="wrap contact">
+        <div class="contact-mark">縁</div>
+        <div class="eyebrow">Let's connect</div>
+        <h2>Have a dataset worth exploring?</h2>
+        <p>I'm open to roles where I can work with data, build analytical solutions and keep growing in AI &amp; Data Science.</p>
+        <div class="contact-actions"><a class="button button-dark" href="mailto:syedmudaseerquadri@gmail.com">syedmudaseerquadri@gmail.com ↗</a><a class="button button-light" href="resume.html">View résumé ↗</a></div>
+        <div class="socials"><a href="https://github.com/SyedMudaseerQuadri" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/syed-mudaseer-quadri" target="_blank" rel="noreferrer">LinkedIn</a></div>
+      </div>
+    </section>
   </main>
-  <footer><span>© 2026 Syed Mudaseer Quadri</span><span>Data · Analysis · AI</span><a href="#top">Back to top ↑</a></footer>
+  <footer><div class="wrap"><span>© 2026 Syed Mudaseer Quadri</span><span>Data · Analysis · AI</span><a href="#top">Back to top ↑</a></div></footer>
   <script src="script.js"></script>
 </body>
 </html>
