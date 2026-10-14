@@ -126,6 +126,9 @@ img{max-width:100%;height:auto;display:block}
 .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(32px,8vw,120px)}
 .about-copy .large{font-size:clamp(22px,2.4vw,28px);line-height:1.4;letter-spacing:-.03em;margin-top:0}
 .about-copy p:not(.large){color:var(--ink-2);max-width:640px}
+.portrait{margin:0 0 28px;max-width:340px;background:var(--white);border:1px solid var(--line-2);border-radius:18px;padding:10px;box-shadow:0 24px 44px -30px rgba(23,23,20,.45);transform:rotate(-1.5deg)}
+.portrait img{width:100%;border-radius:12px;aspect-ratio:4/5;object-fit:cover}
+.portrait figcaption{padding:12px 6px 4px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .facts{border-top:1px solid var(--line-2)}
 .facts>div{padding:20px 0;border-bottom:1px solid var(--line-2)}
 .facts span,.facts small{display:block;font:10px var(--mono);color:var(--muted);letter-spacing:.06em}
