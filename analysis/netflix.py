@@ -53,6 +53,7 @@ mv = n[n.type == "Movie"]["duration"].dropna().str.replace(" min", "").astype(in
 R["runtime_median"] = int(mv.median()); R["runtime_iqr"] = [int(mv.quantile(.25)), int(mv.quantile(.75))]
 ts = n[n.type == "TV Show"]["duration"].dropna().str.extract(r"(\d+)")[0].astype(int)
 R["tv_one_season_share"] = round((ts == 1).mean() * 100, 1)
+R["top_ratings"] = n["rating"].value_counts().head(5).to_dict()
 
 # ---- pricing (original notebook: Netflix, Disney+, Prime Video) ----
 p = pd.read_csv(price_csv)
@@ -76,7 +77,21 @@ for s, d in p.sort_values("date").groupby("service"):
     a, b = d["price"].iloc[0], d["price"].iloc[-1]
     rows.append((s, a, b, (b / a - 1) * 100, d["date"].iloc[0].year, int((d["price"].diff() > 0).sum())))
 inc = pd.DataFrame(rows, columns=["service", "start", "end", "pct", "since", "hikes"]).sort_values("pct")
-R["price_change"] = inc.round(1).to_dict("records")
+R["price_change"] = inc.round(2).to_dict("records")
+
+# every price hike, with the size of the jump
+hikes = []
+for s, d in p.sort_values("date").groupby("service"):
+    d = d.assign(prev=d["price"].shift())
+    for _, h in d[d["price"] > d["prev"]].iterrows():
+        hikes.append({"service": s, "date": h["date"].strftime("%Y-%m"), "from": h["prev"], "to": h["price"]})
+R["hikes"] = hikes
+R["hikes_total"] = len(hikes)
+R["hikes_since_2022"] = sum(h["date"] >= "2022-01" for h in hikes)
+nf = [h for h in hikes if h["service"] == "Netflix"]
+R["netflix_flat_months_before_first_hike"] = (pd.Timestamp(nf[0]["date"]) - p[p.service == "Netflix"]["date"].min()).days // 30
+R["netflix_pct_2019_to_end"] = round((nf[-1]["to"] / nf[0]["to"] - 1) * 100, 1)
+R["netflix_biggest_jump"] = max(nf, key=lambda h: h["to"] - h["from"])
 fig, ax = plt.subplots(figsize=(8, 4.8))
 ax.barh([f"{s} (since {y})" for s, y in zip(inc.service, inc.since)], inc.pct, color=[VERM if v >= 90 else MUTED for v in inc.pct], height=0.55, zorder=3)
 for i, (v, a, b) in enumerate(zip(inc.pct, inc.start, inc.end)):

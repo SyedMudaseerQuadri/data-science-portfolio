@@ -66,86 +66,201 @@
   114
  ],
  "tv_one_season_share": 67.0,
+ "top_ratings": {
+  "TV-MA": 3207,
+  "TV-14": 2160,
+  "TV-PG": 863,
+  "R": 799,
+  "PG-13": 490
+ },
  "price_change": [
   {
    "service": "Crunchyroll",
-   "start": 8.0,
-   "end": 8.0,
+   "start": 7.99,
+   "end": 7.99,
    "pct": 0.0,
    "since": 2020,
    "hikes": 0
   },
   {
    "service": "HBO Max",
-   "start": 15.0,
-   "end": 16.0,
-   "pct": 6.7,
+   "start": 14.99,
+   "end": 15.99,
+   "pct": 6.67,
    "since": 2020,
    "hikes": 1
   },
   {
    "service": "Shudder",
-   "start": 6.0,
-   "end": 7.0,
-   "pct": 16.7,
+   "start": 5.99,
+   "end": 6.99,
+   "pct": 16.69,
    "since": 2016,
    "hikes": 1
   },
   {
    "service": "Paramount+",
-   "start": 10.0,
-   "end": 12.0,
-   "pct": 20.0,
+   "start": 9.99,
+   "end": 11.99,
+   "pct": 20.02,
    "since": 2014,
    "hikes": 1
   },
   {
    "service": "Peacock",
-   "start": 10.0,
-   "end": 12.0,
-   "pct": 20.0,
+   "start": 9.99,
+   "end": 11.99,
+   "pct": 20.02,
    "since": 2020,
    "hikes": 1
   },
   {
    "service": "Prime Video",
-   "start": 9.0,
-   "end": 12.0,
-   "pct": 33.4,
+   "start": 8.99,
+   "end": 11.99,
+   "pct": 33.37,
    "since": 2016,
    "hikes": 1
   },
   {
    "service": "Hulu",
-   "start": 12.0,
-   "end": 18.0,
-   "pct": 50.0,
+   "start": 11.99,
+   "end": 17.99,
+   "pct": 50.04,
    "since": 2015,
    "hikes": 3
   },
   {
    "service": "Netflix",
-   "start": 8.0,
-   "end": 15.5,
-   "pct": 93.9,
+   "start": 7.99,
+   "end": 15.49,
+   "pct": 93.87,
    "since": 2011,
    "hikes": 3
   },
   {
    "service": "Disney+",
-   "start": 7.0,
-   "end": 14.0,
-   "pct": 100.1,
+   "start": 6.99,
+   "end": 13.99,
+   "pct": 100.14,
    "since": 2019,
    "hikes": 3
   },
   {
    "service": "Apple TV+",
-   "start": 5.0,
-   "end": 10.0,
+   "start": 4.99,
+   "end": 9.99,
    "pct": 100.2,
    "since": 2019,
    "hikes": 2
   }
- ]
+ ],
+ "hikes": [
+  {
+   "service": "Apple TV+",
+   "date": "2022-10",
+   "from": 4.99,
+   "to": 6.99
+  },
+  {
+   "service": "Apple TV+",
+   "date": "2024-01",
+   "from": 6.99,
+   "to": 9.99
+  },
+  {
+   "service": "Disney+",
+   "date": "2021-03",
+   "from": 6.99,
+   "to": 7.99
+  },
+  {
+   "service": "Disney+",
+   "date": "2022-12",
+   "from": 7.99,
+   "to": 10.99
+  },
+  {
+   "service": "Disney+",
+   "date": "2023-10",
+   "from": 10.99,
+   "to": 13.99
+  },
+  {
+   "service": "HBO Max",
+   "date": "2023-02",
+   "from": 14.99,
+   "to": 15.99
+  },
+  {
+   "service": "Hulu",
+   "date": "2021-10",
+   "from": 11.99,
+   "to": 12.99
+  },
+  {
+   "service": "Hulu",
+   "date": "2022-12",
+   "from": 12.99,
+   "to": 14.99
+  },
+  {
+   "service": "Hulu",
+   "date": "2024-01",
+   "from": 14.99,
+   "to": 17.99
+  },
+  {
+   "service": "Netflix",
+   "date": "2019-01",
+   "from": 7.99,
+   "to": 8.99
+  },
+  {
+   "service": "Netflix",
+   "date": "2022-01",
+   "from": 8.99,
+   "to": 9.99
+  },
+  {
+   "service": "Netflix",
+   "date": "2023-10",
+   "from": 9.99,
+   "to": 15.49
+  },
+  {
+   "service": "Paramount+",
+   "date": "2023-06",
+   "from": 9.99,
+   "to": 11.99
+  },
+  {
+   "service": "Peacock",
+   "date": "2023-08",
+   "from": 9.99,
+   "to": 11.99
+  },
+  {
+   "service": "Prime Video",
+   "date": "2024-01",
+   "from": 8.99,
+   "to": 11.99
+  },
+  {
+   "service": "Shudder",
+   "date": "2023-08",
+   "from": 5.99,
+   "to": 6.99
+  }
+ ],
+ "hikes_total": 16,
+ "hikes_since_2022": 13,
+ "netflix_flat_months_before_first_hike": 91,
+ "netflix_pct_2019_to_end": 72.3,
+ "netflix_biggest_jump": {
+  "service": "Netflix",
+  "date": "2023-10",
+  "from": 9.99,
+  "to": 15.49
+ }
 }

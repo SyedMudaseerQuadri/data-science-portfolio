@@ -27,6 +27,7 @@ if (figures.length) {
   box.className = "lightbox";
   box.setAttribute("role", "dialog");
   box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "Enlarged chart");
   box.innerHTML = '<button type="button">Close ✕</button><img alt="">';
   document.body.appendChild(box);
   const big = box.querySelector("img");
@@ -36,10 +37,16 @@ if (figures.length) {
   figures.forEach(b => b.addEventListener("click", () => {
     const img = b.querySelector("img");
     big.src = img.src; big.alt = img.alt; last = b;
+    box.setAttribute("aria-label", "Enlarged chart: " + img.alt);
     box.classList.add("open"); closeBtn.focus();
   }));
   box.addEventListener("click", close);
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && box.classList.contains("open")) close(); });
+  document.addEventListener("keydown", e => {
+    if (!box.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    // the close button is the only control in the dialog, so Tab stays on it
+    if (e.key === "Tab") { e.preventDefault(); closeBtn.focus(); }
+  });
 }
 
 // case-study table of contents: highlight the section in view

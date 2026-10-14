@@ -19,6 +19,11 @@ R["tenure_median"] = df.groupby("Churn")["tenure"].median().to_dict()
 R["monthly_median"] = df.groupby("Churn")["MonthlyCharges"].median().round(2).to_dict()
 R["blank_totalcharges"] = int(pd.to_numeric(df["TotalCharges"], errors="coerce").isna().sum())
 yes = lambda s: (s == "Yes").mean() * 100
+churners = df[df["Churn"] == "Yes"]
+R["churner_share_tenure_le3"] = round((churners["tenure"] <= 3).mean() * 100, 1)
+R["churner_share_month_to_month"] = round((churners["Contract"] == "Month-to-month").mean() * 100, 1)
+R["internet_rate"] = df.groupby("InternetService")["Churn"].apply(yes).round(1).to_dict()
+R["payment_rate"] = df.groupby("PaymentMethod")["Churn"].apply(yes).round(1).to_dict()
 
 # 1. Churn rate by contract
 rate = df.groupby("Contract")["Churn"].apply(yes).reindex(["Month-to-month", "One year", "Two year"])

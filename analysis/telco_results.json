@@ -19,6 +19,19 @@
   "Yes": 79.65
  },
  "blank_totalcharges": 11,
+ "churner_share_tenure_le3": 31.9,
+ "churner_share_month_to_month": 88.6,
+ "internet_rate": {
+  "DSL": 19.0,
+  "Fiber optic": 41.9,
+  "No": 7.4
+ },
+ "payment_rate": {
+  "Bank transfer (automatic)": 16.7,
+  "Credit card (automatic)": 15.2,
+  "Electronic check": 45.3,
+  "Mailed check": 19.1
+ },
  "contract_rate": {
   "Month-to-month": 42.7,
   "One year": 11.3,
